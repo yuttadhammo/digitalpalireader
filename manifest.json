@@ -1,0 +1,73 @@
+{
+  "manifest_version": 2,
+  "name": "Digital Pali Reader",
+  "short_name": "DPR",
+  "author": "Yuttadhammo Bhikkhu",
+  "version": "3.0b1",
+  "version-name": "3.0 beta 1",
+  "description": "Provides instant lookup of Pali language words by clicking on the word in a passage being read.",
+  "homepage_url": "https://pali.sirimangalo.org/",
+  "incognito": "not_allowed",
+  "permissions": [
+    "browserAction",
+    "sidebarAction",
+    "extension",
+    "find",
+    "storage",
+    "webNavigation",
+    "omnibox"
+  ],
+  "icons": {
+    "48": "icons/dpr-48.png",
+    "96": "icons/dpr-96.png"
+  },
+  "background": {
+    "scripts": ["scripts/background.js"]
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "ext+dpr",
+      "name": "Digital Pali Reader",
+      "uriTemplate": "scripts/protocolhandler.js?request=%s"
+    }
+  ],
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/dpr-16.png",
+      "32": "icons/dpr-32.png"
+    },
+    "default_title": "Digital Pali Reader",
+    "default_popup": "pages/popup.html",
+    "theme_icons": [{
+      "light": "icons/dpr-16.png",
+      "dark": "icons/dpr-16-dark.png",
+      "size": 16
+    }, {
+      "light": "icons/dpr-32.png",
+      "dark": "icons/dpr-32-dark.png",
+      "size": 32
+    }]
+  },
+  "sidebar_action": {
+    "default_icon": {
+      "16": "icons/dpr-16.png",
+      "32": "icons/dpr-32.png"
+    },
+    "default_title": "Digital Pali Reader",
+    "default_panel": "pages/sidebar.html",
+    "open_at_install":true
+  },
+  "options_ui": {
+    "page": "pages/options.html"
+  },
+  "omnibox": {
+    "keyword": "dpr"
+  },
+  "web_accessible_resources": ["icons/*.png"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{0960232a-a27b-4093-979a-a608a3469b50}"
+    }
+   }
+}
