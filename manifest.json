@@ -4,18 +4,17 @@
   "short_name": "DPR",
   "author": "Yuttadhammo Bhikkhu",
   "version": "3.0b1",
-  "version-name": "3.0 beta 1",
   "description": "Provides instant lookup of Pali language words by clicking on the word in a passage being read.",
   "homepage_url": "https://pali.sirimangalo.org/",
   "incognito": "not_allowed",
   "permissions": [
-    "browserAction",
-    "sidebarAction",
-    "extension",
+    //"browserAction",
+    //"sidebarAction",
+    //"extension",
     "find",
     "storage",
-    "webNavigation",
-    "omnibox"
+    "webNavigation"
+    //"omnibox"
   ],
   "icons": {
     "48": "icons/dpr-48.png",
