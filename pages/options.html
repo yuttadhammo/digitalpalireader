@@ -3,7 +3,7 @@
     <title>Digital Pali Reader Options Page</title>
   </head>
 <body>
-  <<p>This page is a placeholder for Digital Pali Reader options UI</p>
+  <h3>General Options</h3>
   <form id="options" action="">
     <fieldset>
       <legend>Show in Text:</legend>
@@ -13,7 +13,7 @@
       <input type="checkbox" name="showVariantsInline">Show Variants Inline<br>
       <input type="checkbox" name="showPermalinks" checked>Use Permalinks<br>
       <input type="checkbox" name="showNames" checked>Show Pali Proper Names (DPPN Links)<br>
-      <input type="checkbox" name="showPedLinks" checked>Add Word to Pali to English Dictionary (PED) Entries"<br>
+      <input type="checkbox" name="showPedLinks" checked>Add Word to Pali to English Dictionary (PED) Entries<br>
     </fieldset>
     <fieldset>
       <legend>Miscelaneous Preferences:</legend>
@@ -30,15 +30,15 @@
     </fieldset>
     <fieldset>
       <legend>Access To Insight Off-Line Archive:</legend>
-      <input type="checkbox" name="catioff" onclick="if (this.checked) document.getElementByName('catiloc').disabled = true; else document.getElementByName('catiloc').disabled = false">Use Off-line ATI Archive<br>
+      <input type="checkbox" name="catioff" onclick="if (this.checked) document.getElementByID('catiloc').disabled = true; else document.getElementByID('catiloc').disabled = false">Use Off-line ATI Archive<br>
       <label for="catiloc">Location (ati_website):</label>
-      <input type="file" name="catiloc" style="min-width:180px;">
+      <input type="text" id="catiloc" name="catiloc" style="min-width:180px;">
     </fieldset>
     <fieldset>
       <legend>BuddhistTexts Archive:</legend>
-      <input type="checkbox" name="buddhist_texts" onclick="if(this.checked) document.getElementByName('btloc').disabled = true;  else document.getElementByName('btloc').disabled = false">Use BuddhistTexts Archive<br>
+      <input type="checkbox" name="buddhist_texts" onclick="if(this.checked) document.getElementByID('btloc').disabled = true;  else document.getElementByID('btloc').disabled = false">Use BuddhistTexts Archive<br>
       <label for="btloc">Directory Location (BuddhistTexts):</label>
-      <input type="file" name="btloc" style="min-width:180px;">
+      <input type="text" id="catiloc" name="btloc" style="min-width:180px;">
     </fieldset>
   </form>
 </body>
