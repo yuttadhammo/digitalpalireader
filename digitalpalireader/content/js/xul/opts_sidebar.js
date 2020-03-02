@@ -11,7 +11,7 @@ var DPROpts = {
 		document.getElementById('tsoCO2').setAttribute('collapsed',true);
 		document.getElementById('tsoCO3').setAttribute('collapsed',true);
 		document.getElementById('tsoBO').setAttribute('collapsed',true);
-		
+
 		var which = document.getElementById('tipType').selectedIndex;
 		switch(which) {
 			case 0:
@@ -56,10 +56,10 @@ var DPROpts = {
 
 	selAll:function(id) {
 		var box = document.getElementById(id);
-		var sels = box.getElementsByTagName('checkbox');
-		
+		var sels = box.getElementsByTagName(DPR_PAL.isWeb ? 'input' : 'checkbox');
+
 		var cnt = 0;
-		
+
 		// check if all selected
 		for(x=0; x < sels.length; x++) {
 			if(sels[x].getAttribute('checked') == 'true') cnt++;
@@ -70,13 +70,13 @@ var DPROpts = {
 			sels[x].setAttribute('checked',(cnt != sels.length));
 		}
 	},
-	
+
 	dictAdvToggle:function() {
 		var ao = document.getElementById('dictAdvOpts');
 		if(!ao.getAttribute('collapsed')) ao.setAttribute('collapsed',true);
-		else ao.removeAttribute('collapsed'); 
+		else ao.removeAttribute('collapsed');
 	},
-	
+
 	dictOptions:function () {
 		var which = document.getElementById('dictType').value;
 
@@ -188,5 +188,5 @@ var DPROpts = {
 		}
 
 	},
-	
+
 }

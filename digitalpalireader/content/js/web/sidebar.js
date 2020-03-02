@@ -7,11 +7,11 @@ if (DPR_PAL.isWeb) {
 var digitalpalireader = {
 	changeSet() {
 		var nik = $('#nav-set').val();
-		if (G_hier == 't' && (nik == 'k' || nik == 'x' || nik == 'g' || nik == 'b')) { 
+		if (G_hier == 't' && (nik == 'k' || nik == 'x' || nik == 'g' || nik == 'b')) {
 			alert('Ṭīkā not available for '+G_nikLongName[nik]+'.');
 			$('#nav-set').val(oldnikaya);
-			return; 
-		} 
+			return;
+		}
 		if (G_hier == 'a' && nik == 'g') {
 			alert('Atthakatha not available for Gram.');
 			$('#nav-set').val(oldnikaya);
@@ -50,11 +50,13 @@ var digitalpalireader = {
 	},
 
 	updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
-		
-		var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),$('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),$('#nav-section-button').is(":visible")];
-		
+
+    var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
+      $('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),
+      $('#nav-section-button').is(":visible")];
+
 		document.activeElement.blur();
-		
+
 		var nikaya = $('#nav-set').val();
 		var book = $('#nav-book').val();
 		var nikbookhier = nikaya + book + G_hier;
@@ -68,14 +70,14 @@ var digitalpalireader = {
 		var nik = nikaya;
 
 		var xml,axml,lista,list,name,namea;
-		
+
 		axml = xmlDoc.getElementsByTagName("ha");
 		namea = axml[0].getElementsByTagName("han");
-		if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
+		if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
 		else name = this.unnamed;
 		var outname = translit(toUni(name));
 		$('#nav-title').val(outname);
-			
+
 		var u = xmlDoc.getElementsByTagName("h0");
 		var v = u[meta].getElementsByTagName("h1");
 		var w = v[volume].getElementsByTagName("h2");
@@ -90,7 +92,7 @@ var digitalpalireader = {
 
 				listNode = $('#nav-meta');
 				listNode.empty();
-				
+
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.parent().hide();
 					listNode.append($("<option />").val(0).text(this.unnamed));
@@ -100,7 +102,7 @@ var digitalpalireader = {
 					navShown[0] = true;
 					for(idx in lista){
 						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}	
+					}
 					listNode.parent().show();
 				}
 				listNode.val(0);
@@ -109,7 +111,7 @@ var digitalpalireader = {
 
 				listNode = $('#nav-volume');
 				listNode.empty();
-				
+
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					navShown[1] = false;
 					listNode.parent().hide();
@@ -119,7 +121,7 @@ var digitalpalireader = {
 					navShown[1] = true;
 					for(idx in lista){
 						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}	
+					}
 					listNode.parent().show();
 				}
 				listNode.val(0);
@@ -128,7 +130,7 @@ var digitalpalireader = {
 				lista = this.makeTitleSelect(w,'h2n');
 				listNode = $('#nav-vagga');
 				listNode.empty();
-				
+
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					navShown[2] = false;
 					listNode.parent().hide();
@@ -138,7 +140,7 @@ var digitalpalireader = {
 					navShown[2] = true;
 					for(idx in lista){
 						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}	
+					}
 					listNode.parent().show();
 				}
 				listNode.val(0);
@@ -148,7 +150,7 @@ var digitalpalireader = {
 
 				listNode = $('#nav-sutta');
 				listNode.empty();
-				
+
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					navShown[3] = false;
 					listNode.parent().hide();
@@ -158,17 +160,17 @@ var digitalpalireader = {
 					navShown[3] = true;
 					for(idx in lista){
 						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}	
+					}
 					listNode.parent().show();
 				}
 				listNode.val(0);
 			default: // remake section list
 
 				lista = this.makeTitleSelect(y,'h4n');
-	
+
 				listNode = $('#nav-section');
 				listNode.empty();
-				
+
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					navShown[4] = false;
 					listNode.parent().hide();
@@ -178,45 +180,55 @@ var digitalpalireader = {
 					navShown[4] = true;
 					for(idx in lista){
 						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}	
+					}
 					listNode.parent().show();
 				}
 				listNode.val(0);
 			break;
 		}
-		$('.navbutton').hide();
-		switch(true) {
-			case navShown[4]:
-				$('#nav-section-button').show();
-				break;
-			case navShown[3]:
-				$('#nav-sutta-button').show();
-				break;
-			case navShown[2]:
-				$('#nav-vagga-button').show();
-				break;
-			case navShown[1]:
-				$('#nav-volume-button').show();
-				break;
-			case navShown[0]:
-				$('#nav-meta-button').show();
-				break;
-		}
-		
 
+    $('.navbutton').hide();
+    $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
+    $('#nav-title-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections');
+    if (navShown[4]) {
+      $('#nav-section-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+    }
 
+    if (navShown[3]) {
+      navShown[4] ?
+        $('#nav-sutta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
+        $('#nav-sutta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+    }
+
+    if (navShown[2]) {
+      navShown[3] || navShown[4] ?
+        $('#nav-vagga-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
+        $('#nav-vagga-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+    }
+
+    if (navShown[1]) {
+      navShown[2] || navShown[3] || navShown[4] ?
+        $('#nav-volume-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
+        $('#nav-volume-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+    }
+
+    if (navShown[0]) {
+      navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
+        $('#nav-meta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
+        $('#nav-meta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+    }
 	},
 
 	changeHier:function(htmp) {
 
 		if(G_hier == htmp) return;
-		
+
 		var himg = ['l','m','r'];
 
-		if (htmp == 't' && this.limitt(document.getElementById('nav-set').selectedIndex)) { 
+		if (htmp == 't' && this.limitt(document.getElementById('nav-set').selectedIndex)) {
 			var MAT = G_hier == 'm'?'mul':'att';
 			alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('nav-set').value]+'.');
-			return; 
+			return;
 		}
 		if (htmp == 'a' && document.getElementById('nav-set').selectedIndex > 7) {
 			alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('nav-set').value]+'.');
@@ -250,14 +262,14 @@ var digitalpalireader = {
 		}
 		else
 			book = parseInt(book) - 1;
-			
+
 		this.changeSet();
-	},	
+  },
 
 	getSubNavArray:function(){
 		return [$('#nav-set').val(),$('#nav-book option:selected').index(),$('#nav-meta option:selected').index(),$('#nav-volume option:selected').index(),$('#nav-vagga option:selected').index(),$('#nav-sutta option:selected').index(),$('#nav-section option:selected').index(),G_hier];
 	},
-	
+
 	makeTitleSelect:function(xml,tag) { // output menupopup tag with titles in menuitems
 		var name, namea;
 		var outlist = [];
@@ -281,11 +293,45 @@ var digitalpalireader = {
 	limitt:function(nikn) {
 		if (nikn == 5 || nikn > 6) { return true; }
 		else { return false };
-	},
+  },
 
-	loadSection:function(){
-		var aplace = this.getSubNavArray();
-		loadXMLSection("","",aplace);
-		$("#close-left").click();
-	},
+  loadIndex:function(context){
+    switch(context) {
+      case 1:
+        importXMLindex("");
+        break;
+      case 2:
+        DPRSend.importXML(false,null,null,null,'internal',null,1);
+        break;
+    }
+
+    DPR_PAL.closeSideBar();
+  },
+
+  loadSection:function(context,category=6){
+    var aplace;
+    switch(context) {
+      case 1: // quick links
+        if($.trim($('#nav-quicklinks').val()) == ''){
+          alert('Input can not be left blank.');
+        } else
+          try {
+            DPRSend.sendQuickLink("", $('#nav-quicklinks').val());
+          }
+          catch(err) {
+            alert("Invalid quick link.");
+            aplace = this.getSubNavArray();
+            loadXMLSection("","",aplace);
+          }
+        break;
+      case 2: // book hierarchy
+        aplace = this.getSubNavArray().map((x,y)=>(y<(category+1) || y>6 )?x:"x");
+        loadXMLSection("","",aplace);
+        break;
+    }
+
+    DPR_PAL.closeSideBar();
+  },
+
+  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }

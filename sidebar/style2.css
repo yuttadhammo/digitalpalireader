@@ -1,0 +1,90 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+body {
+  font-family: "Poppins", sans-serif;
+  padding:0;
+  margin:0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFD;
+}
+
+#body-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  background-color: white;
+  transition: all 0.3s;
+  border-right: 1px solid #e7e7e7;
+}
+
+#sidebar.active {
+  margin-left: -250px;
+}
+
+#sidebar #sidebar-header {
+  padding: 1rem;
+}
+
+#sidebar #sidebar-body {
+  padding: 1rem;
+}
+
+#page {
+  width: calc(100% - 250px);
+  padding: 40px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#page.active {
+  width: 100%;
+}
+
+#page-header {
+  height: 3rem;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+#page-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -250px;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+
+  #page {
+    width: 100%;
+  }
+
+  #page.active {
+    width: calc(100% - 250px);
+  }
+
+  #sidebarCollapse span {
+    display: none;
+  }
+}

@@ -27,7 +27,7 @@ function openDPRTab(permalink,id,reuse) {
 
 		var start = 0;  // no DPR tabs yet
 		var newIdx = 0;
-		
+
 		for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 
 			// Get the next tab
@@ -141,11 +141,11 @@ function isDPRTab(id) {
 	else return false;
 }
 
-function giveIDtoTabs() { // startup function, give ids to 
+function giveIDtoTabs() { // startup function, give ids to
 	if (!DPR_PAL.isXUL) {
 		return false;
 	}
-	
+
 	var main = 0; //no main dpr tabs
 	var dict = 0; // no dict tabs
 	var search = 0; // no dict tabs
@@ -162,9 +162,9 @@ function giveIDtoTabs() { // startup function, give ids to
 			else if(/search\.xul/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
 			else currentTab.setAttribute('id',(etc++==0?'DPR-x':'DPRx'));
 		}
-	}	
+	}
 	if(main > 0) return true;
-	return false;	
+	return false;
 }
 
 function checkLastTab() {
@@ -186,14 +186,14 @@ function checkLastTab() {
 
 function DPRSidebarWindow() {
 	if (!DPR_PAL.isXUL) {
-		return false;
+		return {DPRNav};
 	}
 
 	var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
 
 	if (sidebar.contentDocument.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return sidebar.contentWindow;
-	} 
+	}
 	else return false
 }
 
@@ -206,7 +206,7 @@ function DPRSidebarDocument() {
 
 	if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return sidebar;
-	} 
+	}
 	else return false
 }
 
@@ -219,7 +219,7 @@ function closeDPRSidebar() {
 
 	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return DPR_PAL.mainWindow.toggleSidebar();
-	} 
+	}
 }
 function openDPRSidebar() {
 	if (!DPR_PAL.isXUL) {
@@ -229,7 +229,7 @@ function openDPRSidebar() {
 	var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 	if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
-	} 
+	}
 }
 
 function setCurrentTitle(title) {
@@ -259,17 +259,21 @@ function DPRBottomPaneUpdateStyle() {
 	document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 
+function DPRSidebarHamburgerMenu() {
+	if (DPR_PAL.isWeb) {
+    return `
+<a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" title="Open side bar">
+  <i class="fa fa-bars" aria-hidden="true"></i>
+</a>`;
+	} else {
+		return '';
+  }
+}
+
 function DPRBottomPaneToggleVisiblity() {
-	if (!DPR_PAL.isWeb) {
-		return;
-	}
+  if (!DPR_PAL.isWeb) {
+    return;
+  }
 
-	$('#pref-box').hide();
-
-	if(!$('#bottom').is(':visible')) {
-		$( "#open-bottom" ).click();
-	}
-	if($('#sidebar').is(':visible')) {
-		$( "#close-left" ).click();
-	}	
+  DPR_PAL.openBottomFrame();
 }

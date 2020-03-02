@@ -50,7 +50,7 @@ function DPR_PAL_Search_ClearSectionLinks() {
 function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {
     const html = `
 <li class="nav-item">
-    <a class="nav-link" href="#" onclick="scrollSearch()">${searchTerm}</a>
+    <a class="nav-link" href="#" onclick="scrollSearch(); return false;">${searchTerm}</a>
 </li>`;
     MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
@@ -60,14 +60,14 @@ function DPR_PAL_Search_AddSectionLink() {
     const id = `matches${G_numberToNik[i]}`;
     const html = `
 <li class="nav-item">
-	<a id="${id}" class="nav-link" href="#" onclick="scrollSearch('${scrollTo}')">${G_nikLongName[G_numberToNik[i]] + ': 0'}</a>
+	<a id="${id}" class="nav-link" href="#" onclick="scrollSearch('${scrollTo}'); return false;">${G_nikLongName[G_numberToNik[i]] + ': 0'}</a>
 </li>`;
     MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
 
 function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
     var val = $('#matches' + nikayaat).text().replace(/: .+/, ': ');
-    $('#matches' + nikayaat).text(val + thiscount);	
+    $('#matches' + nikayaat).text(val + thiscount);
 }
 
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
@@ -89,7 +89,7 @@ function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
 }
 
 function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {
-    $('#search-matches').text(count);	
+    $('#search-matches').text(count);
 }
 
 function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {
